@@ -1,4 +1,4 @@
-FROM php:8.0.2-fpm
+FROM php:8.0.17-fpm-bullseye
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
@@ -111,12 +111,5 @@ WORKDIR /app/
 
 RUN curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
    -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp;
-
-# Creating various helpful folder such as .cache and html and ensure they have the right permissions
-RUN mkdir -p /var/www/.cache && \
-  chmod 777 /var/www/.cache && \
-  chown -R www-data:www-data /var/www/.cache && \
-  chown -R www-data:www-data /var/www/html && \
-  chmod +x /usr/local/bin/*.sh;
 
 EXPOSE 80 443 9000 3000 6006
