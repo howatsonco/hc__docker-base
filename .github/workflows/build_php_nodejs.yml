@@ -8,11 +8,9 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: php8_node16__arm64
+  IMAGE_NAME: hc__docker-base
   
 jobs:
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
   push:
     runs-on: ubuntu-latest
     permissions:
@@ -30,14 +28,14 @@ jobs:
           install: true
 
       - name: Build image
-        run: docker buildx build . --platform linux/arm64 --file php8_node16__arm64/Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+        run: docker buildx build . --platform linux/arm64 --file php8_node16__arm64/Dockerfile --tag $IMAGE_NAME:php8_node16__arm64 --label "runnumber=${GITHUB_RUN_ID}"
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:php8_node16__arm64
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
@@ -49,5 +47,6 @@ jobs:
           [ "$VERSION" == "master" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME:php8_node16__arm64 $IMAGE_ID:$VERSION
+          docker push $IMAGE_NAME:php8_node16__arm64
           docker push $IMAGE_ID:$VERSION
