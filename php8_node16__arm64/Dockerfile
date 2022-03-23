@@ -1,4 +1,4 @@
-FROM php:8.0.17-fpm-bullseye
+FROM php:8.0-fpm-bullseye
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
