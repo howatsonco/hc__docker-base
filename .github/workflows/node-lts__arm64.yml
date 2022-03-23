@@ -9,9 +9,9 @@ on:
 
 env:
   IMAGE_NAME: hc__docker-base
-  DOCKER_FILE: php8_node16__arm64
+  DOCKER_FILE: node-lts__arm64
 jobs:
-  push:
+  node-lts__arm64:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -39,6 +39,3 @@ jobs:
           echo "Building $IMAGE_ID:$DOCKER_FILE"
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker buildx build . --platform linux/arm64 --file $DOCKER_FILE/Dockerfile --tag $IMAGE_ID:$DOCKER_FILE --label "runnumber=${GITHUB_RUN_ID}" --push
-          # Login to Registry
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker push $IMAGE_ID:$DOCKER_FILE
