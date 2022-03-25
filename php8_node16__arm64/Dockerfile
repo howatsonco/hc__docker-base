@@ -103,6 +103,9 @@ RUN { \
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps
 
+# Add in pnpm
+RUN npm install -g pnpm
+
 RUN apt-get clean && \
     mkdir -p /var/www/html/ && \
     mkdir -p /app
