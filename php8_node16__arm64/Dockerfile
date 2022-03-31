@@ -120,6 +120,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 	chmod +x /usr/local/bin/composer
 
 RUN curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-   -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp;
+  -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp;
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
+  unzip awscliv2.zip && \
+  ./aws/install
 
 EXPOSE 80 443 9000 3000 6006
