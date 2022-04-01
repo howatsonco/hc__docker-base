@@ -10,8 +10,10 @@ RUN mkdir /app && \
 RUN npm install -g pnpm
 
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install
+  unzip awscliv2.zip && \
+  ./aws/install && \
+  rm -rf ./aws && \
+  rm awscliv2.zip
 
 WORKDIR /app/
 
