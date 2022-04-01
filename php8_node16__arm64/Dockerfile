@@ -101,7 +101,7 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps unzip
 
 # Add in pnpm
 RUN npm install -g pnpm
