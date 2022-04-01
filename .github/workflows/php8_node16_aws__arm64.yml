@@ -9,9 +9,9 @@ on:
 
 env:
   IMAGE_NAME: hc__docker-base
-  DOCKER_FILE: php8_node16__arm64
+  DOCKER_FILE: php8_node16_aws__arm64
 jobs:
-  php8_node16__arm64:
+  php8_node16_aws__arm64:
     runs-on: ubuntu-latest
     permissions:
       packages: write
