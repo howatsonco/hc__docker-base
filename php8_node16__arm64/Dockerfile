@@ -101,7 +101,7 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps unzip
 
 # Add in pnpm
 RUN npm install -g pnpm
@@ -120,6 +120,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 	chmod +x /usr/local/bin/composer
 
 RUN curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-   -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp;
+  -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp;
 
 EXPOSE 80 443 9000 3000 6006
