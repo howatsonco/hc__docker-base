@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-bullseye
+FROM php:8.1-fpm-bullseye
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
@@ -109,7 +109,7 @@ RUN php -r "copy('https://composer.github.io/installer.sig', 'expected-checksum'
   mv ./composer.phar /usr/local/bin/composer && \
   chmod +x /usr/local/bin/composer
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps unzip
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -- && apt-get install -y nodejs nginx vim procps unzip
 
 # Add in pnpm
 RUN npm install -g pnpm

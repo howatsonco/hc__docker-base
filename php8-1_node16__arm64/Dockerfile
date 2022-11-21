@@ -1,4 +1,4 @@
-FROM php:8.1.0-fpm-bullseye
+FROM php:8.1-fpm-bullseye
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
@@ -100,6 +100,14 @@ RUN { \
 		echo 'ignore_repeated_source = Off'; \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
+
+RUN php -r "copy('https://composer.github.io/installer.sig', 'expected-checksum');" && \
+  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+  php -r "if (hash_file('sha384', 'composer-setup.php') === file_get_contents('expected-checksum')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+  php composer-setup.php && \
+  php -r "unlink('composer-setup.php');" && \
+  mv ./composer.phar /usr/local/bin/composer && \
+  chmod +x /usr/local/bin/composer
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -- && apt-get install -y nodejs nginx vim procps unzip
 
