@@ -3,7 +3,7 @@ FROM node:lts-slim
 RUN mkdir /app && \
     apt-get update -y --fix-missing && \
     apt-get upgrade -y && \
-    apt install -y curl vim zip && \
+    apt install -y curl vim zip less && \
     apt-get clean
 
 # Add in pnpm

@@ -11,6 +11,7 @@ RUN set -ex; \
 		nginx \
 		procps \
 		vim \
+		less \
     ghostscript \
     libvips-dev \
     imagemagick \
@@ -44,7 +45,7 @@ RUN set -ex; \
 		zip \
 	&& \
 # https://pecl.php.net/package/imagick
-	pecl install imagick-3.6.0 && \
+	pecl install imagick-3.7.0 && \
 	docker-php-ext-enable imagick && \
 	rm -r /tmp/pear && \
 	\
