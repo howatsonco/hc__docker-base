@@ -9,7 +9,7 @@ on:
 
 env:
   IMAGE_NAME: hc__docker-base
-  DOCKER_FILE: php8-1_node18_aws__arm64
+  DOCKER_FILE: php8-1_node18__arm64
 jobs:
   php8-1_node18__arm64:
     runs-on: ubuntu-latest
